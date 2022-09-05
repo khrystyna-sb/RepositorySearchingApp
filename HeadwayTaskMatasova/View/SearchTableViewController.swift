@@ -36,6 +36,12 @@ class SearchTableViewController: UITableViewController {
         cell.textLabel?.text = repositoryName?.name
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let repositoryDetailsViewController = RepositoryDetailsViewController()
+        repositoryDetailsViewController.githubRepositoryResult = githubRepositoryResults?.items[indexPath.row]
+        navigationController?.pushViewController(repositoryDetailsViewController, animated: true)
+    }
 }
 
 extension SearchTableViewController: UISearchBarDelegate {

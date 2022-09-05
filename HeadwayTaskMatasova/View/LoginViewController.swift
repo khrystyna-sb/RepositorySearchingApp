@@ -41,8 +41,8 @@ class LoginViewController: UIViewController {
     }
     
     @objc func githubButtonClicked(sender: UIButton) {
-        let vc = GitHubViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        let githubViewController = GitHubViewController()
+        self.navigationController?.pushViewController(githubViewController, animated: true)
     }
 }
 
