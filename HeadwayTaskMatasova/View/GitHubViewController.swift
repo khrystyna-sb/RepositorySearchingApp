@@ -28,7 +28,7 @@ class GitHubViewController: UIViewController {
     
     func webViewSettings() {
         webView.navigationDelegate = self
-
+        
         let authURLFull = "https://github.com/login/oauth/authorize?client_id=" + GithubConstants.CLIENT_ID + "&scope=" + GithubConstants.SCOPE + "&redirect_uri=" + GithubConstants.REDIRECT_URI + "&state=" + UUID().uuidString
         
         let urlRequest = URLRequest(url: URL(string: authURLFull)!)
@@ -49,10 +49,14 @@ class GitHubViewController: UIViewController {
 
 
 extension GitHubViewController: WKNavigationDelegate {
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        tokenFetcher.RequestForCallbackURL(request: navigationAction.request)
+        if let code = tokenFetcher.RequestForCallbackURL(request: navigationAction.request) {
+            self.dismiss(animated: true, completion: nil)
+            tokenFetcher.githubRequestForAccessToken(authCode: code)
+            let vc = SearchTableViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         decisionHandler(.allow)
     }
-    
-    
 }

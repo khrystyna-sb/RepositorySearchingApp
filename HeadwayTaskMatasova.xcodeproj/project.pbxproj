@@ -67,19 +67,43 @@
 			isa = PBXGroup;
 			children = (
 				C51B0C5C28C5136000316475 /* AppDelegate.swift */,
-				C51B0C7628C5342800316475 /* TokenFetcher.swift */,
-				C51B0C7228C52CB100316475 /* GitHubConstants.swift */,
-				C51B0C7A28C54DC600316475 /* NetworkService.swift */,
 				C51B0C5E28C5136000316475 /* SceneDelegate.swift */,
-				C51B0C6028C5136000316475 /* LoginViewController.swift */,
-				C51B0C7028C515BF00316475 /* GitHubViewController.swift */,
-				C51B0C7428C5330B00316475 /* GithubRepositoryResults.swift */,
-				C51B0C7828C5492D00316475 /* SearchTableViewController.swift */,
+				C51B0C7228C52CB100316475 /* GitHubConstants.swift */,
+				C51B0C7C28C5FCBD00316475 /* Network */,
+				C51B0C7D28C5FCE500316475 /* View */,
+				C51B0C7E28C5FD1000316475 /* Model */,
 				C51B0C6528C5136300316475 /* Assets.xcassets */,
 				C51B0C6728C5136300316475 /* LaunchScreen.storyboard */,
 				C51B0C6A28C5136300316475 /* Info.plist */,
 			);
 			path = HeadwayTaskMatasova;
+			sourceTree = "<group>";
+		};
+		C51B0C7C28C5FCBD00316475 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C51B0C7628C5342800316475 /* TokenFetcher.swift */,
+				C51B0C7A28C54DC600316475 /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		C51B0C7D28C5FCE500316475 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C51B0C6028C5136000316475 /* LoginViewController.swift */,
+				C51B0C7028C515BF00316475 /* GitHubViewController.swift */,
+				C51B0C7828C5492D00316475 /* SearchTableViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C51B0C7E28C5FD1000316475 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C51B0C7428C5330B00316475 /* GithubRepositoryResults.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

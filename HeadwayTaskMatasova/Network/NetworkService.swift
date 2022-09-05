@@ -42,7 +42,6 @@ class NetworkService: NetworkServiceProtocol {
                                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                                 let json = try decoder.decode(GithubRepositoryResults.self, from: data)
                                 repositoryData(json)
-                                print("json = \(json)")
                             } catch let error {
                                 print("Failed to decode JSON: \(error)")
                                 repositoryData(nil)

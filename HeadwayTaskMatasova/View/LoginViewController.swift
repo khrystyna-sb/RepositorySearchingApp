@@ -15,7 +15,7 @@ fileprivate struct Constants {
 
 class LoginViewController: UIViewController {
     
-    let githubLogInButton: UIButton = {
+    private let githubLogInButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .gray
         button.setTitle("Log In", for: UIControl.State.normal)
@@ -24,7 +24,6 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-   
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGithubButtonLayout()
@@ -43,8 +42,7 @@ class LoginViewController: UIViewController {
     
     @objc func githubButtonClicked(sender: UIButton) {
         let vc = GitHubViewController()
-        modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

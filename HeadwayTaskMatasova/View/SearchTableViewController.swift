@@ -15,7 +15,8 @@ class SearchTableViewController: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupSearchBar()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
     private func setupSearchBar() {
@@ -40,7 +41,7 @@ class SearchTableViewController: UITableViewController {
 extension SearchTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
-            guard  let url = URL(string: "https://api.github.com/search/repositories?q=\(searchText)&per_page=12&page=1") else { return }
+            guard  let url = URL(string: "https://api.github.com/search/repositories?q=\(searchText)&per_page=30&page=1") else { return }
             
             let request = networkService.request(url: url)
             networkService.dataTask(request: request as URLRequest, repositoryData: { (repositoryData) in
