@@ -54,7 +54,7 @@ extension GitHubViewController: WKNavigationDelegate {
         if let code = tokenFetcher.RequestForCallbackURL(request: navigationAction.request) {
             self.dismiss(animated: true, completion: nil)
             tokenFetcher.githubRequestForAccessToken(authCode: code)
-            let searchTableViewController = SearchTableViewController()
+            let searchTableViewController = SearchRepositoryViewController()
             self.navigationController?.pushViewController(searchTableViewController, animated: true)
         }
         decisionHandler(.allow)

@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import Combine
 
 protocol NetworkServiceProtocol {
     
-    func request(url: URL) -> NSMutableURLRequest
-    func dataTask(request: URLRequest, repositoryData: @escaping (GithubRepositoryResults?) -> Void)
+    func loadRepositories(request: URLRequest) -> AnyPublisher<GithubRepositoryResults, Error>
 }
 
 class NetworkService: NetworkServiceProtocol {
     
+    var anyCancelable = Set<AnyCancellable>()
+            
     func request(url: URL) -> NSMutableURLRequest {
         
         let request = NSMutableURLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
@@ -30,23 +32,25 @@ class NetworkService: NetworkServiceProtocol {
            return request
     }
     
-    func dataTask(request: URLRequest, repositoryData: @escaping (GithubRepositoryResults?) -> Void) {
+    func loadRepositories(request: URLRequest) -> AnyPublisher<GithubRepositoryResults, Error> {
         
-        URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-                    DispatchQueue.main.async {
-                        guard error == nil else { return }
-        
-                            guard let data = data else {return}
-                            do {
-                                let decoder = JSONDecoder()
-                                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                                let json = try decoder.decode(GithubRepositoryResults.self, from: data)
-                                repositoryData(json)
-                            } catch let error {
-                                print("Failed to decode JSON: \(error)")
-                                repositoryData(nil)
-                            }
-                        }
-                }).resume()
+        return Future {[weak self] promise in
+            guard let self = self else {return}
+        URLSession.shared.dataTaskPublisher(for: request)
+            .retry(1)
+            .tryMap { result -> Data in
+                guard let httpResponse = result.response as? HTTPURLResponse, httpResponse.statusCode == 200 else { throw URLError(.badServerResponse)}
+                return result.data
+            }
+            .decode(type: GithubRepositoryResults.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                
+            } receiveValue: { repositories in
+                promise(.success(repositories))
+            }
+            .store(in: &self.anyCancelable)
+        }
+        .eraseToAnyPublisher()
     }
 }

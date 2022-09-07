@@ -16,9 +16,10 @@
 		C51B0C7328C52CB100316475 /* GitHubConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51B0C7228C52CB100316475 /* GitHubConstants.swift */; };
 		C51B0C7528C5330B00316475 /* GithubRepositoryResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51B0C7428C5330B00316475 /* GithubRepositoryResults.swift */; };
 		C51B0C7728C5342800316475 /* TokenFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51B0C7628C5342800316475 /* TokenFetcher.swift */; };
-		C51B0C7928C5492D00316475 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51B0C7828C5492D00316475 /* SearchTableViewController.swift */; };
+		C51B0C7928C5492D00316475 /* SearchRepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51B0C7828C5492D00316475 /* SearchRepositoryViewController.swift */; };
 		C51B0C7B28C54DC600316475 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51B0C7A28C54DC600316475 /* NetworkService.swift */; };
 		C51B0C8028C60FA700316475 /* RepositoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51B0C7F28C60FA700316475 /* RepositoryDetailsViewController.swift */; };
+		C51B0C8228C6A1D000316475 /* SearchRepositoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51B0C8128C6A1D000316475 /* SearchRepositoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +34,10 @@
 		C51B0C7228C52CB100316475 /* GitHubConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubConstants.swift; sourceTree = "<group>"; };
 		C51B0C7428C5330B00316475 /* GithubRepositoryResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepositoryResults.swift; sourceTree = "<group>"; };
 		C51B0C7628C5342800316475 /* TokenFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenFetcher.swift; sourceTree = "<group>"; };
-		C51B0C7828C5492D00316475 /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		C51B0C7828C5492D00316475 /* SearchRepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryViewController.swift; sourceTree = "<group>"; };
 		C51B0C7A28C54DC600316475 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		C51B0C7F28C60FA700316475 /* RepositoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailsViewController.swift; sourceTree = "<group>"; };
+		C51B0C8128C6A1D000316475 /* SearchRepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +76,9 @@
 				C51B0C7C28C5FCBD00316475 /* Network */,
 				C51B0C7D28C5FCE500316475 /* View */,
 				C51B0C7E28C5FD1000316475 /* Model */,
-				C51B0C6528C5136300316475 /* Assets.xcassets */,
+				C51B0C8328C7CFF600316475 /* ViewModel */,
 				C51B0C6728C5136300316475 /* LaunchScreen.storyboard */,
+				C51B0C6528C5136300316475 /* Assets.xcassets */,
 				C51B0C6A28C5136300316475 /* Info.plist */,
 			);
 			path = HeadwayTaskMatasova;
@@ -95,7 +98,7 @@
 			children = (
 				C51B0C6028C5136000316475 /* LoginViewController.swift */,
 				C51B0C7028C515BF00316475 /* GitHubViewController.swift */,
-				C51B0C7828C5492D00316475 /* SearchTableViewController.swift */,
+				C51B0C7828C5492D00316475 /* SearchRepositoryViewController.swift */,
 				C51B0C7F28C60FA700316475 /* RepositoryDetailsViewController.swift */,
 			);
 			path = View;
@@ -107,6 +110,14 @@
 				C51B0C7428C5330B00316475 /* GithubRepositoryResults.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C51B0C8328C7CFF600316475 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C51B0C8128C6A1D000316475 /* SearchRepositoryViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,7 +199,8 @@
 				C51B0C5F28C5136000316475 /* SceneDelegate.swift in Sources */,
 				C51B0C8028C60FA700316475 /* RepositoryDetailsViewController.swift in Sources */,
 				C51B0C7128C515BF00316475 /* GitHubViewController.swift in Sources */,
-				C51B0C7928C5492D00316475 /* SearchTableViewController.swift in Sources */,
+				C51B0C7928C5492D00316475 /* SearchRepositoryViewController.swift in Sources */,
+				C51B0C8228C6A1D000316475 /* SearchRepositoryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

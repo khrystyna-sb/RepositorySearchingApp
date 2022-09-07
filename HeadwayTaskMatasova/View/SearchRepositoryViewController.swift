@@ -1,17 +1,18 @@
 //
-//  SearchTableViewController.swift
+//  SearchRepositoryViewController.swift
 //  HeadwayTaskMatasova
 //
 //  Created by Roma Test on 04.09.2022.
 //
 
 import UIKit
+import Combine
 
-class SearchTableViewController: UITableViewController {
+class SearchRepositoryViewController: UITableViewController {
     
-    let searchController = UISearchController(searchResultsController: nil)
-    var githubRepositoryResults: GithubRepositoryResults?
-    let networkService = NetworkService()
+    private let searchController = UISearchController(searchResultsController: nil)
+    private(set) var viewModel: SearchRepositoryViewModel?
+    private var anyCancellable = Set<AnyCancellable>()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,33 +28,26 @@ class SearchTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        githubRepositoryResults?.items.count ?? 0
+        viewModel?.githubRepositoryResults?.items.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let repositoryName = githubRepositoryResults?.items[indexPath.row]
+        let repositoryName = viewModel?.githubRepositoryResults?.items[indexPath.row]
         cell.textLabel?.text = repositoryName?.name
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let repositoryDetailsViewController = RepositoryDetailsViewController()
-        repositoryDetailsViewController.githubRepositoryResult = githubRepositoryResults?.items[indexPath.row]
+        repositoryDetailsViewController.githubRepositoryResult = viewModel?.githubRepositoryResults?.items[indexPath.row]
         navigationController?.pushViewController(repositoryDetailsViewController, animated: true)
     }
 }
 
-extension SearchTableViewController: UISearchBarDelegate {
+extension SearchRepositoryViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-            guard  let url = URL(string: "https://api.github.com/search/repositories?q=\(searchText)&per_page=30&page=1") else { return }
-            
-            let request = networkService.request(url: url)
-            networkService.dataTask(request: request as URLRequest, repositoryData: { (repositoryData) in
-                guard let repositoryData = repositoryData else {return}
-                self.githubRepositoryResults = repositoryData
-                self.tableView.reloadData()
-            })
+        self.viewModel = SearchRepositoryViewModel(searchText: searchText)
+        self.tableView.reloadData()
         }
 }

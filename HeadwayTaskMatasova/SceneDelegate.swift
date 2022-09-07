@@ -23,9 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         let loginViewController = LoginViewController(nibName: nil, bundle: nil)
-//        navigationController.viewControllers = [loginViewController]
-        
-        
         navigationController.pushViewController(loginViewController, animated: false)
 
     }
