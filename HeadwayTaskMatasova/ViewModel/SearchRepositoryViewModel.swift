@@ -15,8 +15,6 @@ final class SearchRepositoryViewModel: ObservableObject {
     
     private let networkService = NetworkService()
     private var anyCancellable = Set<AnyCancellable>()
-//    private var pagination: (currentPage: Int,
-//                             results: GithubRepositoryResults?) = (0, nil)
 
     init(searchText: String) {
         self.searchText = searchText
@@ -27,7 +25,7 @@ final class SearchRepositoryViewModel: ObservableObject {
         
         guard  let url = URL(string: "https://api.github.com/search/repositories?q=\(searchText)&per_page=30&page=1") else { return }
         
-        networkService.fetch(url: url) { (result: Result<GithubRepositoryResults, Error>) in
+        networkService.getRepositories(url: url) { (result: Result<GithubRepositoryResults, Error>) in
               switch result {
               case .success(let result):
                   self.githubRepositoryResults = result
@@ -37,22 +35,4 @@ final class SearchRepositoryViewModel: ObservableObject {
               }
             }
     }
-        
-        
-//        let request = networkService.request(url: url)
-//        networkService.loadRepositories(request: request as URLRequest)
-//            .receive(on: DispatchQueue.main)
-//            .sink { completion in
-//                switch completion {
-//                case .finished:
-//                    break
-//                case .failure(let error):
-//                    print(error)
-//                }
-//            } receiveValue: { [weak self] results in
-//                guard let self = self else {return}
-//                self.githubRepositoryResults = results
-//                print(results)
-//            }
-//            .store(in: &anyCancellable)
 }

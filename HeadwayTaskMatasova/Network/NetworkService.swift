@@ -10,14 +10,14 @@ import Combine
 
 protocol NetworkServiceProtocol {
     
-    func fetch(url: URL, completion: @escaping (Result<GithubRepositoryResults, Error>) -> Void )
+    func getRepositories(url: URL, completion: @escaping (Result<GithubRepositoryResults, Error>) -> Void )
 }
 
 class NetworkService: NetworkServiceProtocol {
     
     var anyCancelable = Set<AnyCancellable>()
     
-    func fetch(url: URL, completion: @escaping (Result<GithubRepositoryResults, Error>) -> Void ) {
+    func getRepositories(url: URL, completion: @escaping (Result<GithubRepositoryResults, Error>) -> Void ) {
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -33,12 +33,11 @@ class NetworkService: NetworkServiceProtocol {
             case .finished:
               return
             }
-          } receiveValue: { (resultArr) in
-            completion(.success(resultArr))
+          } receiveValue: { (result) in
+            completion(.success(result))
           }
           .store(in: &anyCancelable)
       }
-    
 }
 
 

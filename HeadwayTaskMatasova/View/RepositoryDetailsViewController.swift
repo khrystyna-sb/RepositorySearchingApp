@@ -60,6 +60,7 @@ class RepositoryDetailsViewController: UIViewController {
         }
         if let description = githubRepositoryResult.description {
             let descriptionLabel = UILabel()
+            descriptionLabel.numberOfLines = 0
             descriptionLabel.text = StackViewConstants.descriptionLabelPrefix + description
             mainStackView.addArrangedSubview(descriptionLabel)
         }
